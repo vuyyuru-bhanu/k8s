@@ -1,0 +1,26 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restart-nev
+spec:
+  containers:
+    - image: alpine
+      name: restart-nev-container
+      command: 
+        - sleep
+      args: 
+        - 1d
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: restart-nopolicy
+spec: 
+  containers:
+    - image: alpine
+      name: restart-nopolicy-container
+      command: 
+        - sleep
+        - "2"
