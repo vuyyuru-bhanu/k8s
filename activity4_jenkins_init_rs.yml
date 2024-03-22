@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-jen
+  labels:
+    app: rs
+spec:
+  minReadySeconds: 2
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jen
+  template: 
+    metadata:
+      name: jen-pod
+      labels:
+        app: jen
+        version: "1"
+    spec:
+      containers:
+        - image: jenkins/jenkins
+          name: jen-con
+          ports: 
+            - containerPort: 80
+              protocol: TCP
+      initContainers:
+        - image: alpine
+          name: alpine-init
+          command:
+            - ping 
+          args:
+            - "google.com"
+            - "-c"
+            - "4"
+#         restartPolicy: Never  (is not wroking will fix later)
