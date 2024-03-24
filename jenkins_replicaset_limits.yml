@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: jen-rs
+spec:
+  minReadySeconds: 0
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jen
+  template:
+    metadata: 
+      name: jen-pod
+      labels:
+        app: jen
+        ver: "1"
+    spec: 
+      containers:
+        - image: jenkins/jenkins
+          name: jen-con
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits: 
+              memory: "512Mi"
+            requests:
+              memory: "256Mi"
+                
