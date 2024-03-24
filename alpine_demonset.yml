@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: test-ds
+spec:
+  minReadySeconds: 3
+  selector:
+    matchLabels:
+      app: alpine
+  template:
+    metadata:
+      name: alpine-pod
+      labels:
+        app: alpine
+    spec:
+      containers:
+        - image: alpine
+          name: apline-con
+          command:
+            - sleep
+            - 1d
